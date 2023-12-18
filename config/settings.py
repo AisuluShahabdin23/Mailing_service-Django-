@@ -9,9 +9,8 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
-
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -44,6 +43,7 @@ INSTALLED_APPS = [
     'sendmail',
     'users',
     'django_apscheduler',
+    'blog',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
@@ -151,3 +151,13 @@ EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 EMAIL_HOST_USER = 'AisShakh@yandex.ru'
 EMAIL_HOST_PASSWORD = 'qrwtvhbipvgvzcyh'
+
+CACHE_ENABLED = 'True'
+
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": "redis://127.0.0.1:6379",
+        }
+    }

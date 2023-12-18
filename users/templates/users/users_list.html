@@ -1,20 +1,24 @@
 {% extends 'sendmail/base.html' %}
 
 {% block content %}
+<div class="header mx-auto text-center">
+    <h5 class="display-4">Пользователи сервиса</h5>
+</div>
+
 <div class="col-6">
     <div class="row">
-        <h2> Пользователи сервиса </h2>
         {% for object in object_list %}
             <form class="row" method="post">
                 <div class="col-6 mb-3">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="my-1 font-weight-normal">Пользователь: {{ object.email }}</h5>
-                        </div>
-                        <div class="card-body">
-                            {% csrf_token %}
-                            {{ form }}
-                            <button type="submit">Сохранить</button>
+                            <h5 class="my-2 font-weight-normal">Пользователь: {{ object.email }}</h5>
+                            {% if not object.is_active %}
+                                <p>Заблокирован</p>
+                            {% else %}
+                                <p>Активный</p>
+                            {% endif %}
+                            <a class="p-2 btn btn-outline-primary" href="{% url 'users:edit' object.pk %}">Редактировать</a>
                         </div>
                     </div>
                 </div>

@@ -12,12 +12,14 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal">SendMailService</h5>
     <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="{% url 'sendmail:home' %}">Рассылки</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'sendmail:home' %}">Главная</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'sendmail:mailing_list' %}">Рассылки</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'sendmail:message_list' %}">Сообщения</a>
-        {% if user.role == moderator %}
-            <a class="p-2 btn btn-outline-primary" href="{% url 'users:users' %}">Пользователи</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'sendmail:client_list' %}">Клиенты</a>
+        {% if perms.sendmail.set_is_active %}
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:list_view' %}">Пользователи</a>
         {% endif %}
-
+        <a class="p-2 btn btn-outline-primary" href="{% url 'blog:blog_list' %}">Блог</a>
         {% if user.is_authenticated %}
             <a class="p-2 btn btn-outline-primary" href="{% url 'users:logout' %}">Выход</a>
         {% else %}
@@ -26,15 +28,6 @@
         {% endif %}
     </nav>
 </div>
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h3 class="display-4">SendMailService</h3>
-    <p class="lead">SendMailService - сервис управления рассылками,администрирования и получения статистики.
-    </p>
-</div>
-<div class="header mx-auto text-center">
-    <h5 class="display-4">{{ title }}</h5>
-</div>
-<div class="container">
     {% block content %}
     {% endblock %}
 <footer class="pt-4 my-md-5 pt-md-5 border-top">

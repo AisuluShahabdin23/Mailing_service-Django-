@@ -1,12 +1,26 @@
 {% extends 'sendmail/base.html' %}
 
 {% block content %}
-<div class="row text-center">
-    <div class="col-12">
-        <h3>
-            Поздравляем, Вы успешно зарегистрировались!<br>
-            Для дальнейшей работы нажмите "Войти".
-        </h3>
-    </div>
-</div>
+  <div class="col-12">
+      <form class='row' method="post" enctype="multipart/form-data">
+          <div class="col-12"></div>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">
+                  Введите код
+                </h4>
+              </div>
+              <div class="card-body">
+                  {% csrf_token %}
+
+                  <input type="text" name="ver_code" class="form-control" id="verify_code" required>
+              </div>
+              <div class="card-footer">
+                  <button type="submit" class="btn btn-success">Подтвердить</button>
+              </div>
+            </div>
+          </div>
+      </form>
+  </div>
 {% endblock %}
